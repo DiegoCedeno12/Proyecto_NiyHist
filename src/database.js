@@ -7,6 +7,7 @@ const MONGODB_URI = `mongodb://${NIYHIST_MONGODB_HOST}/${NIYHIST_MONGODB_DATABAS
 
 mongoose.set('strictQuery', true);
 
+
 (async () => {
     try {
         await mongoose.connect(MONGODB_URI);
