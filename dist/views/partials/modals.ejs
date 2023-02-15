@@ -1,0 +1,121 @@
+<!-- Modal Modificar la info -->
+<div class="modal fade" id="editarFamiliar{{ _id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="bi bi-pencil-square"></i> Editar Perfil
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="p-2" action="/family/update/{{ _id }}?_method=PUT" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                    <div class="container-fluid mt-3 border bloque g-3">
+                        <div style='height:20px;'>
+                            <p
+                                style="color: #b1b4b8; margin-top:-12px; width: 145px; margin-left:15px; font-size:15px; background:white;">
+                                Informacion Personal</p>
+                        </div>
+
+                        <div class="form-switch py-1" style="text-align: end;">
+                            {{#if reported }}
+                                <input class="form-check-input reported-active" type="checkbox" role="switch" id="reported{{_id}}" name="reported" checked="">
+                            {{else}}
+                                <input class="form-check-input reported-desactive" type="checkbox" role="switch" id="reported{{_id}}" name="reported">
+                            {{/if}}
+                            <label class="form-check-label no-reportar" for="reported" id="reportado{{_id}}">Reportar como desaparecido</label>
+                        </div>
+                        <div class="row ps-3 pe-3 pb-4">
+                            <div class="col-sm-6">
+                                <label for="cedulaIdentidad" class="form-label">Cedula de Identidad:</label>
+                                <input type="text" class="form-control" id="cedulaIdentidad" value="{{ identify }}" name="identify">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" value="{{ first_name }}" name="first_name">
+                            </div>
+                            <div class="col-sm-6 mt-3">
+                                <label for="apellido" class="form-label">Apellido:</label>
+                                <input type="text" class="form-control" id="apellido" value="{{ last_name }}" name="last_name">
+                            </div>
+
+                            <div class="col-sm-6 mt-3">
+                                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
+                                <input type="date" class="form-control fechaNacimiento" id="inputfechaNacimiento{{_id}}" min="1920-01-01"
+                                    max="2020-12-30" value="" name="birth_date">
+                            </div>
+
+                            <div class="col-sm-6 mt-3">
+                                <label for="edad" class="form-label">Edad:</label>
+                                <input type="number" class="form-control" id="edadanadir" value="{{age}}" name="age">
+                            </div>
+
+                            <div class="col-sm-6 mt-3">
+                                <label for="correo" class="form-label">Correo Electronico:</label>
+                                <input type="email" class="form-control" id="correo" name="email" value="{{email}}">
+                            </div>
+
+                            <div class="col-sm-12 mt-3">
+                                <label for="direccion" class="form-label">Dirección:</label>
+                                <input type="text" class="form-control" id="direccion" value="{{address}}" name="address">
+                            </div>
+
+                            <div class="col-sm-12 mt-3">
+                                <label for="imagen" class="form-label">Foto:</label>
+                                <input type="file" class="form-control" id="image" placeholder="Foto de la persona" name="image">
+                                <div class="input-group mt-2">
+                                    <span class="input-group-text" id="basic-addon3">Actualmente</span>
+                                    <a href="/public/upload/{{image}}" class="form-control"
+                                        style="color:rgb(38, 38, 255)">{{image}}</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid border bloque mt-5">
+                        <div style='height:30px;'>
+                            <p
+                                style="color: #b1b4b8; margin-top:-12px; width: 135px; margin-left:15px; font-size:15px; background:white;">
+                                Informacion Medica
+                            </p>
+                        </div>
+
+                        <div class="row ps-3 pe-3 pb-4">
+                            <div class="col-sm-6 mt-2">
+                                <label for="cedulaIdentidad" class="form-label">Tipo de Sangre:</label>
+                                <select class="form-select" aria-label="Default select example" id="tipSangre{{_id}}" name="blood_type">
+                                    <option value="1">A+</option>
+                                    <option value="2">A-</option>
+                                    <option value="3">B+</option>
+                                    <option value="4">B-</option>
+                                    <option value="5">O+</option>
+                                    <option value="6">O-</option>
+                                    <option value="7">AB+</option>
+                                    <option value="8">AB-</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 mt-2">
+                                <label for="alergias" class="form-label">Alergias:</label>
+                                <input type="text" class="form-control" id="alergias" value="Ninguna" name="allergies">
+                            </div>
+                            <div class="col-sm-6 mt-3">
+                                <label for="discapacidad" class="form-label">Discapacidad (%):</label>
+                                <input type="number" class="form-control" id="discapacidad" value="{{ disability }}" name="disability">
+                            </div>
+
+                            <div class="col-sm-6 mt-3">
+                                <label for="medicamentos" class="form-label">Medicamentos (Describa):</label>
+                                <input type="text" class="form-control" id="medicamentos" value="{{ medices }}" name="medices">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

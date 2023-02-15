@@ -1,0 +1,102 @@
+<%- layout('layouts/main')%>
+  <div class="main">
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!--  Contenido  -->
+    <div class="container-xxl mt-3 my-5">
+      <div class="container mt-3">
+        <h2 class="ps-4">
+          <%= PageTitle %>
+        </h2>
+        <div class="row row-cols-2 row-cols-md-3 g-3 cardBox">
+          <div class="col-4 me-md-4" style="width: 247px;">
+            <div class="card" id="anadir">
+              <div>
+                <span class="iconBx">
+                  <a href="/family/add"><i class="bi bi-plus-square"></i></a>
+                </span>
+              </div>
+            </div>
+          </div>
+          <% familiares.forEach(familiar=> { %>
+            <div class="col-4 me-md-4" id="rows" style="width: auto">
+              <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                  <img src="/public/upload/<%= familiar.image %>" class="card-img-top rounded-3 mt-2" alt="Sin foto"
+                    style="height: 213px; width:210px; background:white;">
+                  <div class="gap-3 text-white sobrepositionAñadir">
+                    <a id="generarQr" data-bs-toggle="modal" data-bs-target="#mostrarQr" role="button" onclick="generar('<%= familiar.id %>')" type="button"><i
+                        class="bi bi-qr-code"></i></a>
+                    <a id="reportarFamiliar" data-bs-toggle="tooltip" title="Hooray!"
+                      href="/missing/add/<%= familiar.id %> "><i class="bi bi-exclamation-diamond"></i></a>
+                    <a id="editarFamiliar" href="/family/update/<%= familiar.id %>" role="button"
+                      onclick="TipoSangre('<%= familiar.blood_type %>', '<%= familiar.id %>', '<%= familiar.birth_date %>', '<%= familiar.reported %>')"><i
+                        class="bi bi-pencil-square"></i></a>
+                    <a onclick="deleteFamily('<%= familiar.id %>','<%= familiar.first_name %>')" type="button"
+                      id="eliminarFamiliar"><i class="bi bi-trash3"></i></a>
+                  </div>
+                </div>
+
+                <div class="card-body text-white">
+                  <span class="card-text" style="font-weight: bold;">Nombre:</span>
+                  <span>
+                    <%= familiar.first_name %>
+                      <%= familiar.last_name %>
+                  </span> <br>
+                  <span class="card-text" style="font-weight: bold;">Edad:</span>
+                  <span>
+                    <%= familiar.age %> años
+                  </span> <br>
+                  <span class="card-text" style="font-weight: bold;">Ciudad:</span>
+                  <span>
+                    <%= familiar.address %>
+                  </span>
+                  <div class="accordion-item">
+                    <div id="flush-collapse<%= familiar.id %>" class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body">
+                        <!-- Aquí la información -->
+                        <span class="card-text" style="font-weight: bold;">Dispacidad:</span>
+                        <span>
+                          <%= familiar.disability %>%
+                        </span> <br>
+                        <span class="card-text" style="font-weight: bold;">Causa:</span>
+                        <span>Alzaimer</span> <br>
+                        <span class="card-text" style="font-weight: bold;">Alergia:</span>
+                        <span>
+                          <%= familiar.allergies %>
+                        </span> <br>
+                        <span class="card-text" style="font-weight: bold;">Tipo de Sangre:</span>
+                        <span id="spantipoSangre<%= familiar.id %>"></span>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="container-fluid text-center">
+                  <div class="row" id="botones">
+                    <div class="col pb-2">
+                      <a class="accordion-button collapsed text-muted" style="text-align: center; display:block; "
+                        type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<%= familiar.id %>"
+                        onclick="Cambio('<%= familiar.blood_type %>', '<%= familiar.id %>')" aria-expanded="false"
+                        aria-controls="flush-collapse<%= familiar.id %>">
+                        Ver más
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include ('./partials/modalQr') %> 

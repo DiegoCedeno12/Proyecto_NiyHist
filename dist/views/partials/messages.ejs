@@ -1,0 +1,42 @@
+<% if (success_msg.length> 0) { %>
+  <script>
+    Swal.fire({
+      "text": `<%= success_msg %>`,
+      "icon": "success",
+      "showConfirmButton": false,
+      "timer": "1800",
+    })
+  </script>
+  <%} %>
+
+    <% if (signinMessage.length> 0) { %>
+      <script>
+        $.confirm({
+          icon: 'bi bi-exclamation-triangle',
+    title: '\t¡Aviso!',
+    content: '<%= signinMessage %>',
+    type: 'red',
+    typeAnimated: true,
+    buttons: {
+        Salir: function () {
+        }
+    }
+});
+      </script>
+      <%} %>
+
+        <% if (signupMessage.length> 0) { %>
+          <script>
+            $.confirm({
+              icon: 'bi bi-exclamation-triangle',
+        title: '\t¡Aviso!',
+        content: '<%= signupMessage %>',
+        type: 'red',
+        typeAnimated: true,
+        buttons: {
+            Salir: function () {
+            }
+        }
+    });
+          </script>
+          <%} %>
