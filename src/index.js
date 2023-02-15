@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 import app from "./server";
 import "./database";
 

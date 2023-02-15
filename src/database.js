@@ -1,7 +1,5 @@
-require('dotenv').config();
 import mongoose from 'mongoose';
 
-const { NIYHIST_MONGODB_HOST, NIYHIST_MONGODB_DATABASE } = process.env;
 
 const MONGODB_URI = "mongodb+srv://admin:Armando.02@api-mongodb.mhrw02x.mongodb.net/?retryWrites=true&w=majority"
 mongoose.set('strictQuery', true);

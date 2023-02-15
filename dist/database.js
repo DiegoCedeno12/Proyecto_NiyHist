@@ -4,10 +4,6 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _mongoose = _interopRequireDefault(require("mongoose"));
-require('dotenv').config();
-var _process$env = process.env,
-  NIYHIST_MONGODB_HOST = _process$env.NIYHIST_MONGODB_HOST,
-  NIYHIST_MONGODB_DATABASE = _process$env.NIYHIST_MONGODB_DATABASE;
 var MONGODB_URI = "mongodb+srv://admin:Armando.02@api-mongodb.mhrw02x.mongodb.net/?retryWrites=true&w=majority";
 _mongoose["default"].set('strictQuery', true);
 (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
