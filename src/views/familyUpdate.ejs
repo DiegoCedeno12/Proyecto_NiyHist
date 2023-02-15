@@ -1,0 +1,126 @@
+<%- layout('layouts/main')%>
+<div class="main">
+  <div class="topbar">
+    <div class="toggle">
+      <ion-icon name="menu-outline"></ion-icon>
+    </div>
+  </div>
+
+  <!--  Contenido  -->
+  <div class="container-xxl mt-3 my-4">
+    <h2><%= PageTitle %></h2>
+    <form class="p-2" action="/family/update/<%= familiars.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_method" value="PUT">
+        <div class="container-fluid mt-3 border bloque g-3" style="border-color: white !important">
+            <div style='height:20px;'>
+                <p
+                    style="color: #00909E; margin-top:-12px; width: 145px; margin-left:15px; font-size:15px; background:#DAE1E7;">
+                    Informacion Personal</p>
+                </div>
+            <div class="row ps-3 pe-3 pb-4">
+                <div class="col-sm-6 mt-3">
+                    <label for="cedulaIdentidad" class="form-label">Cedula de Identidad:</label>
+                    <input type="text" class="form-control" id="cedulaIdentidad" value="<%= familiars.identify %>" name="identify">
+                </div>
+                <div class="col-sm-6 mt-3">
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" value="<%= familiars.first_name %>" name="first_name">
+                </div>
+                <div class="col-sm-6 mt-3">
+                    <label for="apellido" class="form-label">Apellido:</label>
+                    <input type="text" class="form-control" id="apellido" value="<%= familiars.last_name %>" name="last_name">
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
+                    <input type="date" class="form-control fechaNacimiento" id="fechaNacimiento" min="1920-01-01"
+                        max="2020-12-30" value="<%= fechaCalculada(familiars.birth_date) %>" name="birth_date">
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <label for="edad" class="form-label">Edad:</label>
+                    <input type="number" class="form-control" id="edadanadir" value="<%= familiars.age %>" name="age">
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <label for="correo" class="form-label">Correo Electronico:</label>
+                    <input type="email" class="form-control" id="correo" name="email" value="<%= familiars.email %>">
+                </div>
+
+                <div class="col-sm-12 mt-3">
+                    <label for="direccion" class="form-label">Dirección:</label>
+                    <input type="text" class="form-control" id="direccion" value="<%= familiars.address %>" name="address">
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <label for="latitud" class="form-label">Latitud: </label>
+                    <input class="form-control" id="latitud" name="latitude" value="<%= familiars.latitude %>">
+                </div>
+                <div class="col-sm-6 mt-3">
+                  <label for="longitud" class="form-label">Longitud: </label>
+                    <input class="form-control" id="longitud" name="longitud" value="<%= familiars.longitud %>">
+                </div>
+                <div class="col-sm-12 mt-3" style="display: flex;
+                margin-top: -72px !important;
+                justify-content: end;
+                height: 30px;">
+                    <a class="btn btn-success btn-sm text-black" role="button" data-bs-toggle="modal" data-bs-target="#map"><i class="bi bi-pin-map"></i> Agregar</a>
+                  </div>
+                <div class="col-sm-12 mt-3">
+                    <label for="image" class="form-label">Foto:</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                    <div class="input-group mt-2">
+                        <span class="input-group-text" id="basic-addon3">Actualmente</span>
+                        <a href="/public/upload/<%= familiars.image %>" class="form-control"
+                            style="color:rgb(38, 38, 255)"><%= familiars.image %></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid border bloque mt-5" style="border-color: white !important">
+            <div style='height:30px;'>
+                <p
+                        style="color: #00909E; margin-top:-12px; width: 135px; margin-left:15px; font-size:15px; background:#DAE1E7;">
+                        Informacion Medica
+                    </p>
+            </div>
+
+            <div class="row ps-3 pe-3 pb-4">
+                <div class="col-sm-6 mt-2">
+                    <input type="hidden" id="valorTipoSangre" value="<%= familiars.blood_type %> ">
+                    <label for="cedulaIdentidad" class="form-label">Tipo de Sangre:</label>
+                    <select class="form-select " aria-label="Default select example" id="tipSangre" name="blood_type">
+                        <option value="1">A+</option>
+                        <option value="2">A-</option>
+                        <option value="3">B+</option>
+                        <option value="4">B-</option>
+                        <option value="5">O+</option>
+                        <option value="6">O-</option>
+                        <option value="7">AB+</option>
+                        <option value="8">AB-</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 mt-2">
+                    <label for="alergias" class="form-label">Alergias:</label>
+                    <input type="text" class="form-control" id="alergias" value="<%= familiars.allergies %>" name="allergies">
+                </div>
+                <div class="col-sm-6 mt-3">
+                    <label for="discapacidad" class="form-label">Discapacidad (%):</label>
+                    <input type="number" class="form-control" id="discapacidad" value="<%= familiars.disability %>" name="disability">
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <label for="medicamentos" class="form-label">Medicamentos (Describa):</label>
+                    <input type="text" class="form-control" id="medicamentos" value="<%= familiars.medices %>" name="medices">
+                </div>
+            </div>
+        </div>
+        <div class="d-flex pt-3 justify-content-end">
+            <a type="button" href="/family" class="btn btn-secondary me-md-2">Cerrar</a>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+  </div>
+</div>
+<%- include ('./partials/map') %> 

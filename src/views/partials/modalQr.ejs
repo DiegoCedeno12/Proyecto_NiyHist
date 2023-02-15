@@ -1,0 +1,28 @@
+<!-- Modal Modificar la info -->
+<div class="modal fade" id="mostrarQr" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="border: none;">
+            
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <div class="modal-body" style="height: 198px; align-items: center; display: flex; justify-content: center; width: auto;">
+            <div class="loaderActivo">
+                <span class="flech" style="--delay: 0.1s"><ion-icon name="ellipse-outline"></ion-icon></span>
+                <span class="flech" style="--delay: 0.3s"><ion-icon name="ellipse-outline"></ion-icon></span>
+                <span class="flech" style="--delay: 0.5s"><ion-icon name="ellipse-outline"></ion-icon></span>
+                <span class="flech" style="--delay: 0.7s"><ion-icon name="ellipse-outline"></ion-icon></span>
+                <span class="flech" style="--delay: 0.9s"><ion-icon name="ellipse-outline"></ion-icon></span>
+              </div>
+            <div class="qr_code">
+                <img src="/public/img/blanco.png" height="300" class="img-fluid" id="imagen">
+            </div>
+            </div>
+            <div class="modal-footer" >
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrar">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="descargar">Descargar</button>
+            </div>
+        </div>
+    </div>
+</div>

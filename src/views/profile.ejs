@@ -1,0 +1,80 @@
+<%- layout('layouts/main')%>
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </div>
+
+        <!--  Contenido  -->
+        <div class="container-xxl mt-3 my-4">
+            <h2 class=" ps-4">
+                <%= PageTitle %>
+            </h2>
+            <form class="row g-4 needs-validation was-validated p-5" action="/profile?_method=PUT" method="post">
+                <input type="hidden" name="_method" value="PUT">
+                <div class="col-md-6">
+                    <label for="first_name_user" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="first_name_user"
+                        value="<%= usersesion.first_name_user %>" placeholder="Ingrese su Nombre" name="first_name_user"
+                        required>
+                    <div class="invalid-feedback">
+                        Ingrese su Nombre
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="last_name_user" class="form-label">Apellido:</label>
+                    <input type="text" class="form-control" id="last_name_user" name="last_name_user"
+                        value="<%= usersesion.last_name_user %>" placeholder="Ingrese su Apellido" required>
+                    <div class="invalid-feedback">
+                        Ingrese su Apellido
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="username" class="form-label">Nombre de Usuario:</label>
+                    <input type="text" class="form-control" id="username" name="username"
+                        value="<%= usersesion.username %>" required>
+                    <div class="invalid-feedback">
+                        Ingrese su Nombre de Usuario.
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Correo Electronico:</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<%= usersesion.email %>"
+                        required>
+                    <div class="invalid-feedback">
+                        Ingrese su correo electronico.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="cellphone" class="form-label">Telefono (Casa):</label>
+                    <input type="text" class="form-control" id="cellphone" name="cellphone"
+                        value="<%= usersesion.cellphone %>" required>
+                    <div class="invalid-feedback">
+                        Ingrese su numero de Telefono.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="cellphone" class="form-label">Telefono (Trabajo):</label>
+                    <input type="text" class="form-control" id="cellphone2" name="cellphone2"
+                        value="<%= usersesion.cellphone2 %>" required>
+                    <div class="invalid-feedback">
+                        Ingrese su numero de Telefono.
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <label for="address_user" class="form-label">Dirección:</label>
+                    <input type="text" class="form-control" id="address_user" name="address_user"
+                        value="<%= usersesion.address_user %>" required>
+                    <div class="invalid-feedback">
+                        Ingrese su Dirección.
+                    </div>
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto mt-4">
+                    <button class="btn btn-primary" type="submit">Actualizar Información</button>
+                </div>
+            </form>
+        </div>
+
+    </div>

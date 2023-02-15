@@ -1,0 +1,136 @@
+<%- layout('layouts/main')%>
+  <div class="main">
+    <div class="topbar">
+      <div class="toggle">
+        <ion-icon name="menu-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!--  Contenido  -->
+    <div class="container-xxl mt-3 my-5">
+      <div class="container mt-3">
+        <h2 class="ps-4">
+          <%= PageTitle %>
+        </h2>
+        <div class="row row-cols-1 row-cols-md-5 g-1 cardBox">
+          <% familiares.forEach(familiares=> { %>
+            <% desaparecidos.forEach(desaparecidos=> { %>
+              <% if (familiares._id==desaparecidos.id_Family) { %>
+                <div class="col-4 me-md-4" id="rows" style="width: auto">
+                  <div class="card" style="width: 16rem;">
+                    <div class="card-header">
+                      <img src="/public/upload/<%= familiares.image %>" class="card-img-top rounded-3 mt-2"
+                        alt="Sin foto" style="height: 213px; width:210px; background:white;">
+                      <div class="sobreposition">
+                        <% if (desaparecidos.found==true) { %>
+                          <span id="encontrado">Persona encontrada</span>
+                          <% } else { %>
+                            <span>Reportado <%= timeago(desaparecidos.createdAt) %></span>
+
+                            <% } %>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                      <span class="card-text" style="font-weight: bold;">Nombre:</span>
+                      <span>
+                        <%= familiares.first_name %>
+                          <%= familiares.last_name %>
+                      </span> <br>
+                      <span class="card-text" style="font-weight: bold;">Edad:</span>
+                      <span>
+                        <%= familiares.age %> años
+                      </span> <br>
+                      <span class="card-text" style="font-weight: bold;">Ciudad:</span>
+                      <span>
+                        <%= familiares.address %>
+                      </span>
+                    </div>
+
+                    <div class="container-fluid text-center">
+                      <div class="row" id="botones">
+                        <div class="col pb-2">
+                          <a class="accordion-button collapsed text-muted" style="text-align: center; display:block; "
+                            type="button"
+                            onclick="alterta('<%= familiares.image %>',
+                        '<%= familiares.first_name %>',
+                        '<%= familiares.last_name %>',
+                        '<%= familiares.age %>',
+                        '<%= desaparecidos.height %>', '<%= familiares.address %>', '<%= desaparecidos.skinColor %>', '<%= desaparecidos.eyeColor %>', '<%= desaparecidos.hairColor %>', '<%= desaparecidos.nationality %>')">
+                            Ver todo
+                          </a>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                  <% }) %>
+                    <% }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function alterta(imagen, nombre, apellido, edad, altura, direccion, piel, ojos, cabello, nacionalidad) {
+      $.confirm({
+        columnClass: 'col-md-12',
+        title: '',
+        theme: 'material',
+        type: 'green',
+        content:
+          '<div class="card mb-3">' +
+          '<div class="row g-0">' +
+          '<div class="col-md-4">' +
+          '<img src="/public/upload/' + imagen + '" class="card-img-top rounded-2" alt="...">' +
+
+          '</div>' +
+          '<div class="col-md-8">' +
+          '<div class="card-body">' +
+          '<div class="row g-3">' +
+          '<div class="col-6">' +
+          '<label for="cedulaIdentidad" class="form-label">Nombre:</label>' +
+          '<input type="text" class="form-control" value="' + nombre + '" disabled>' +
+          '</div>' +
+          '<div class="col-6">' +
+          '<label for="cedulaIdentidad" class="form-label">Apellido:</label>' +
+          '<input type="text" class="form-control" value=' + apellido + ' disabled>' +
+          '</div>' +
+          '<div class="col-6">' +
+          '<label for="cedulaIdentidad" class="form-label">Direccion:</label>' +
+          '<input type="text" class="form-control" value=' + direccion + ' disabled>' +
+          '</div>' +
+          '<div class="col-6">' +
+          '<label for="cedulaIdentidad" class="form-label">Nacionalidad:</label>' +
+          '<input type="text" class="form-control" value=' + nacionalidad + ' disabled>' +
+          '</div>' +
+          '<div class="col-6">' +
+          '<label for="cedulaIdentidad" class="form-label">Edad:</label>' +
+          '<input type="text" class="form-control" value=' + edad + ' disabled>' +
+          '</div>' +
+          '<div class="col-6">' +
+          '<label for="cedulaIdentidad" class="form-label">Color de Ojos:</label>' +
+          '<input type="text" class="form-control" value=' + ojos + ' disabled>' +
+          '</div>' +
+          '<div class="col-6">' +
+          '<label for="cedulaIdentidad" class="form-label">Color de Cabello:</label>' +
+          '<input type="text" class="form-control" value=' + cabello + ' disabled>' +
+          '</div>' +
+          '<div class="col-6">' +
+          '<label for="cedulaIdentidad" class="form-label">Color de Piel:</label>' +
+          '<input type="text" class="form-control" value=' + piel + ' disabled>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>',
+        buttons: {
+          Cerrar: {
+            btnClass: 'btn-blue'
+          }
+        }
+      });
+    }
+  </script>

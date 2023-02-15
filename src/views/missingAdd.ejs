@@ -1,0 +1,219 @@
+<%- layout('layouts/main')%>
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </div>
+
+        <!--  Contenido  -->
+        <div class="container-xxl mt-3 my-4">
+            <h2 class="ps-3"><i class="bi bi-person-fill-exclamation"></i>
+                <%= PageTitle %>
+            </h2>
+            <div class="container">
+                <% if (desaparecidos) { %>
+                    <form class="p-3 needs-validation was-validated"
+                        action="/missing/update/<%= desaparecidos._id %>?_method=PUT" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <% } else { %>
+                            <form class="p-3 needs-validation was-validated"
+                                action="/missing/add/<%= missingFamily._id %>" method="POST">
+                                <% } %>
+                                    <div class="container-fluid mt-3 border bloque g-3" style="border-color: white !important">
+                                        <div style='height:20px;'>
+                                        <p
+                                            style="color: #00909E; margin-top:-12px; width: 130px; margin-left:15px; font-size:15px; background:#DAE1E7;">
+                                                Lugar que fue vista</p>
+                                        </div>
+                                        <% if (desaparecidos) { %>
+                                            <div class="form-switch pt-1" style="text-align: end;">
+                                                <% if ( desaparecidos.found ) { %>
+                                                    <input class="form-check-input reported-active" type="checkbox" role="switch" id="reported" name="found" checked="">
+                                                <% } else { %>
+                                                    <input class="form-check-input reported-desactive" type="checkbox" role="switch" id="reported" name="found">
+                                                <%} %>
+                                                <label class="form-check-label no-reportar" for="reported" id="reportado">Persona encontrada</label>
+                                            </div>
+                                        <% } %>
+                                        <div class="row ps-3 pe-3 pb-4">
+                                            <div class="col-sm-6 mt-2">
+                                                <label for="dateNow" class="form-label">Fecha:</label>
+                                                <input type="date" class="form-control" id="dateNow" name="reportedDate"
+                                                    value="" required="">
+                                            </div>
+                                            <div class="col-sm-6 mt-2">
+                                                <label for="timeNow" class="form-label">Hora:</label>
+                                                <input type="time" class="form-control" id="timeNow" name="timeNow"
+                                                    value="" required="">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid border bloque mt-5" style="border-color: white !important">
+                                        <div style='height:20px;'>
+                                        <p
+                                            style="color: #00909E; margin-top:-12px; width: 100px; margin-left:15px; font-size:15px; background:#DAE1E7;">
+                                                Rasgos Fisicos
+                                            </p>
+                                        </div>
+                                        <div class="row ps-3 pe-3 pb-4">
+                                            <div class="col-sm-6 mt-3">
+                                                <% if (desaparecidos) { %>
+                                                    <input type="hidden" id="valorSexo"
+                                                        value="<%= desaparecidos.sex %> ">
+                                                    <% } %>
+                                                        <label for="sex" class="form-label">Sexo:</label>
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            name="sex" id="sex" required="">
+                                                            <option selected></option>
+                                                            <option value="1">Masculino</option>
+                                                            <option value="2">Femenino</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            Por favor seleccione su sexo
+                                                        </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mt-3">
+                                                <label for="fechaNacimiento" class="form-label">Fecha de
+                                                    Nacimiento:</label>
+                                                <input type="date" class="form-control fechaNacimiento"
+                                                    id="fechaNacimiento" min="1920-01-01" max="2020-12-30"
+                                                    name="fechaNacimiento"
+                                                    value="<%= fechaCalculada(missingFamily.birth_date) %>">
+                                            </div>
+
+                                            <div class="col-sm-6 mt-3">
+                                                <label for="ageNow" class="form-label">Edad Actual:</label>
+                                                <input type="number" class="form-control" id="edadanadir" <% if
+                                                    (desaparecidos) { %> value="<%= missingFamily.age %>" <% } %>
+                                                        name="age">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese alergias
+                                                        </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mt-3">
+                                                <label for="nationality" class="form-label">Nacionalidad:</label>
+                                                <input type="text" class="form-control" id="nationality"
+                                                    name="nationality" <% if (desaparecidos) { %> value="<%=
+                                                    desaparecidos.nationality %>" <% } %>
+                                                        required="">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese la Nacionalidad
+                                                        </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mt-3">
+                                                <label for="height" class="form-label">Altura (m):</label>
+                                                <input type="number" min="0.01" step="any" class="form-control"
+                                                    id="height" <% if (desaparecidos) { %> value="<%=
+                                                    desaparecidos.height %>"<% } %>
+                                                        name="height" required="">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese la altura en metros
+                                                        </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mt-3">
+                                                <label for="eyeColor" class="form-label">Color de Ojos:</label>
+                                                <input type="text" class="form-control" id="eyeColor" name="eyeColor" <%
+                                                    if (desaparecidos) { %> value="<%= desaparecidos.eyeColor %>" <% }
+                                                        %> required="">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese el color de Ojos
+                                                        </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mt-3">
+                                                <label for="hairColor" class="form-label">Color de Cabello:</label>
+                                                <input class="form-control" id="hairColor" name="hairColor" type="text"
+                                                    <% if (desaparecidos) { %> value="<%= desaparecidos.hairColor %>" <%
+                                                        } %> required="">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese el color de Cabello
+                                                        </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mt-3">
+                                                <label for="skinColor" class="form-label">Color de tez (Piel):</label>
+                                                <input class="form-control" id="skinColor" name="skinColor" type="text"
+                                                    <% if (desaparecidos) { %> value="<%= desaparecidos.skinColor %>" <%
+                                                        } %> required="">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese el color de tez
+                                                        </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="container-fluid border bloque mt-5" style="border-color: white !important">
+                        <div style='height:20px;'>
+                        <p
+                            style="color: #00909E; margin-top:-12px; width: 75px; margin-left:15px; font-size:15px; background:#DAE1E7;">
+                                                Vestimenta
+                                            </p>
+                                        </div>
+                                        <div class="row ps-3 pe-3 pb-4">
+                                            <div class="col-sm-6 mt-2">
+                                                <label for="shirt" class="form-label">Camisa/Blusa:</label>
+                                                <input type="text" class="form-control" id="shirt" name="shirt" <% if
+                                                    (desaparecidos) { %> value="<%= desaparecidos.shirt %>" <% } %>
+                                                        required="">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese su tipo de Sangre
+                                                        </div>
+                                            </div>
+                                            <div class="col-sm-6 mt-2">
+                                                <label for="pants" class="form-label">Pantalon/Falda:</label>
+                                                <input type="text" class="form-control" id="pants" name="pants" <% if
+                                                    (desaparecidos) { %> value="<%= desaparecidos.pants %>" <% } %>
+                                                        required="">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese alergias
+                                                        </div>
+                                            </div>
+                                            <div class="col-sm-12 mt-3">
+                                                <label for="shoes" class="form-label">Zapatos/Zapatillas:</label>
+                                                <input type="text" class="form-control" id="shoes" name="shoes" <% if
+                                                    (desaparecidos) { %> value="<%= desaparecidos.shoes %>" <% } %>
+                                                        required="">
+                                                        <div class="invalid-feedback">
+                                                            Por favor ingrese el porcentaje de discapacidad
+                                                        </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+                                        <% if (desaparecidos) { %>
+                                            <button class="btn btn-primary" type="submit">Actualizar</button>
+                                            <% } else { %>
+                                                <button class="btn btn-primary" type="submit">Guardar</button>
+                                                <% } %>
+                                    </div>
+                            </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            myDate = new Date();
+            hours = myDate.getHours();
+            minutes = myDate.getMinutes();
+            if (hours < 10) hours = 0 + hours;
+            if (minutes < 10) minutes = "0" + minutes;
+            document.getElementById('timeNow').value = [hours, minutes].join(":");
+            setTimeout("showTime()", 1000);
+
+
+            const fechaActual = new Date();
+            const anoActual = fechaActual.getFullYear();
+            const mesActual = ("0" + (fechaActual.getMonth() + 1)).slice(-2);
+            const diaActual = ("0" + fechaActual.getDate()).slice(-2);
+            document.getElementById('dateNow').value = [anoActual, mesActual, diaActual].join('-');
+        })
+    </script>
